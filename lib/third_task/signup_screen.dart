@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,30 +12,32 @@ class HeaticApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title:'Login to Heatic',
-      home: const loginScreen(),
+      title:'Create an Account',
+      home: const signUpScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class loginScreen extends StatefulWidget {
-  const loginScreen({super.key});
+class signUpScreen extends StatefulWidget {
+  const signUpScreen({super.key});
 
   @override
-  State<loginScreen> createState() => _loginScreenState();
+  State<signUpScreen> createState() => _signUpScreenState();
 }
 
-
-class _loginScreenState extends State<loginScreen> {
-
+class _signUpScreenState extends State<signUpScreen> {
   final _formKey = GlobalKey<FormState>();
+
+  final _fullnameController = TextEditingController();
   final _emailController = TextEditingController();
+
   final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(title: Text('Login to Heatic', style: TextStyle(fontSize: 22,fontFamily:'title'),),
+      appBar: AppBar(title: Text('Create an Account', style: TextStyle(fontSize: 22,fontFamily:'title'),),
         centerTitle:true,
         toolbarHeight: 200,
       ),
@@ -48,15 +49,28 @@ class _loginScreenState extends State<loginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-           //  SizedBox(height: 20),
-
+                //  SizedBox(height: 20),
+                TextFormField(
+                  controller: _fullnameController,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    hintText: "Enter your name",
+                    hintStyle: TextStyle(fontFamily: 'text'),
+                    prefixIcon: Icon(Icons.person),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ), 
+                  keyboardType: TextInputType.name,
+                ),
+                SizedBox(height: 16),
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                    isDense: true,
-                      hintText: "Enter Email",
+                      isDense: true,
+                      hintText: "Enter your Email",
                       hintStyle: TextStyle(fontFamily:'text'),
-                      suffixIcon: Icon(Icons.email,size: 25,),
+                      prefixIcon: Icon(Icons.email,size: 25,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30)
                       )),
@@ -64,15 +78,16 @@ class _loginScreenState extends State<loginScreen> {
                 ),
                 SizedBox(height: 16),
 
-              TextFormField(
+                TextFormField(
 
                   controller: _passwordController,
                   decoration: InputDecoration(
-                    isDense: true,
+                      isDense: true,
 
-                      hintText: "Password",
+                      hintText: "Enter Password",
                       hintStyle: TextStyle(fontFamily:'text'),
-                      suffixIcon: Icon(Icons.remove_red_eye_outlined,size:25,),
+                      suffixIcon: Icon(Icons.remove_red_eye_rounded,size:25,),
+                      prefixIcon: Icon(Icons.lock,size: 25,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30)
                       )),
@@ -87,17 +102,17 @@ class _loginScreenState extends State<loginScreen> {
                     elevation: 3,
                     minimumSize: const Size(double.infinity, 55),),  //
                   onPressed: (){},
-                  child: Text('Login', style: TextStyle(fontFamily:'text',fontSize: 16),),
+                  child: Text('Sign Up', style: TextStyle(fontFamily:'text',fontSize: 16),),
                 ),
                 SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:
-                [
+                  [
 
-                  Text("Don't have an account?",style: TextStyle(fontSize: 16,fontFamily:'text'),),
-                  Text(" Sign up", style: TextStyle(fontSize: 17,color: Colors.purple,fontFamily:'title'),)
-                ],)
+                    Text("Already have an account?",style: TextStyle(fontSize: 16,fontFamily:'text'),),
+                    Text(" Login", style: TextStyle(fontSize: 17,color: Colors.purple,fontFamily:'title'),)
+                  ],)
               ],
             ),
           ),
@@ -106,6 +121,7 @@ class _loginScreenState extends State<loginScreen> {
     );
   }
 }
+
 
 
 
