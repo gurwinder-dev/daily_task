@@ -16,7 +16,12 @@ class HeaticDebateFeed extends StatelessWidget {
   }
 }
 
-class DebateFeedPage extends StatelessWidget {
+class DebateFeedPage extends StatefulWidget {
+  @override
+  State<DebateFeedPage> createState() => _DebateFeedPageState();
+}
+
+class _DebateFeedPageState extends State<DebateFeedPage> {
   final List<Map<String, dynamic>> debateData = [
     {
       'username': 'Simran123',
@@ -49,6 +54,23 @@ class DebateFeedPage extends StatelessWidget {
     },
 
   ];
+
+  List<bool> liked = [];
+
+  @override
+  void initState() {
+    super.initState();
+    liked = List.filled(debateData.length, false);
+  }
+
+  void _handleLike(int index) {
+    setState(() {
+      if (liked[index]) {
+        debateData[index]['likes'] += 1;
+        liked[index] = true;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +108,11 @@ class DebateFeedPage extends StatelessWidget {
                     children: [
                       Text('Likes: ${debate['likes']}'),
                       ElevatedButton(
-                        onPressed: () {
-                          // No functionality needed
-                        },
-                        child: Text('Like'),
+                        onPressed: () => _handleLike(index),
+                        child: Text(liked[index] ? 'Liked' : 'Like'),
+                        style: ElevatedButton.styleFrom(
+                         // backgroundColor: liked[index] ? Colors.grey : null,
+                        ),
                       ),
                     ],
                   ),
