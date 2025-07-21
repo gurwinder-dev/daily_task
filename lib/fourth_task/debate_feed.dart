@@ -110,9 +110,6 @@ class _DebateFeedPageState extends State<DebateFeedPage> {
                       ElevatedButton(
                         onPressed: () => _handleLike(index),
                         child: Text(liked[index] ? 'Liked' : 'Like'),
-                        style: ElevatedButton.styleFrom(
-                         // backgroundColor: liked[index] ? Colors.grey : null,
-                        ),
                       ),
                     ],
                   ),
