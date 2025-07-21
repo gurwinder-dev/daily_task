@@ -54,7 +54,7 @@ class DebateDetailsPage extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 24,
-                  backgroundImage: AssetImage("assets/profile-picture.png"), // Replace with your asset
+                  backgroundImage: AssetImage("assets/profile-picture.png"),
                 ),
                 SizedBox(width: 12),
                 Column(
