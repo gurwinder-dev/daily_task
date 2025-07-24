@@ -11,28 +11,43 @@ class HeaticApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Heatic',
-      home: debateScreen(),
+      home: DebateScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-
-class debateScreen extends StatefulWidget {
-  const debateScreen({super.key});
+class DebateScreen extends StatefulWidget {
+  const DebateScreen({super.key});
 
   @override
-  State<debateScreen> createState() => _debateScreenState();
+  State<DebateScreen> createState() => _DebateScreenState();
 }
 
-class _debateScreenState extends State<debateScreen> {
-
+class _DebateScreenState extends State<DebateScreen> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _opinionController = TextEditingController();
+
   final List<String> _topics = [
     'Health', 'Education', 'Sports', 'Environment', 'Art', 'Tech', 'Politics'
   ];
 
   String? _selectedTopic;
+
+  @override
+  void dispose() {
+    _opinionController.dispose();
+    super.dispose();
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Debate posted successfully!")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,68 +62,72 @@ class _debateScreenState extends State<debateScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: TextField(
-                controller: _opinionController,
-                maxLines: null,
-                expands: true,
-                textAlignVertical: TextAlignVertical.top,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  controller: _opinionController,
+                  maxLines: null,
+                  expands: true,
+                  textAlignVertical: TextAlignVertical.top,
+                  decoration: InputDecoration(
+                    hintText: "Write your opinion here...",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    contentPadding: EdgeInsets.all(16),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Opinion cannot be empty';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              DropdownButtonFormField<String>(
+                value: _selectedTopic,
+                hint: Text("Select a topic"),
+                items: _topics.map((topic) {
+                  return DropdownMenuItem<String>(
+                    value: topic,
+                    child: Text(topic),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedTopic = value;
+                  });
+                },
+                validator: (value) {
+                  if (value == null) {
+                    return 'Please select a topic';
+                  }
+                  return null;
+                },
                 decoration: InputDecoration(
-                  hintText: "Write your opinion here...",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  contentPadding: EdgeInsets.all(16),
+                  contentPadding:
+                  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-
-            DropdownButtonFormField<String>(
-              value: _selectedTopic,
-              hint: Text("Select a topic"),
-              items: _topics.map((topic) {
-                return DropdownMenuItem<String>(
-                  value: topic,
-                  child: Text(topic),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  _selectedTopic = value;
-                });
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
-
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SizedBox(
           height: 50,
           child: ElevatedButton(
-            onPressed: () {
-              final opinion = _opinionController.text.trim();
-              if (opinion.isEmpty || _selectedTopic == null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Please enter your opinion and select a topic")),
-                );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Debate posted successfully!")),
-                );
-              }
-            },
+            onPressed: _submitForm,
             child: Text("Post"),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
