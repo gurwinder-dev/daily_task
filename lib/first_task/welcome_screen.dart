@@ -1,5 +1,6 @@
 
 
+import 'package:first_task/seventh_task/debate_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -42,7 +43,8 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
-
+                   Navigator.push(context,
+                   MaterialPageRoute(builder: (context)=>debateScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
@@ -52,7 +54,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                   child: const Text(
-                    'Get Started',
+                    'Start Debate',
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
