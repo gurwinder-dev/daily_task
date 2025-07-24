@@ -38,7 +38,12 @@ class _debateScreenState extends State<debateScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Create Debate'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
         centerTitle: true,
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
