@@ -9,7 +9,7 @@ class HeaticApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Heatic',
       home: DebateScreen(),
       debugShowCheckedModeBanner: false,

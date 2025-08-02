@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(HeaticDebateFeed());
 }
 
-class HeaticDebateFeed extends StatelessWidget {
+class HeaticDebateFeed extends StatefulWidget {
+  @override
+  State<HeaticDebateFeed> createState() => _HeaticDebateFeedState();
+}
+
+class _HeaticDebateFeedState extends State<HeaticDebateFeed> {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,10 +52,10 @@ class _DebateFeedPageState extends State<DebateFeedPage> {
       'username': 'PreetAmritsar01',
       'opinion': 'Governments should ban single-use plastics entirely.',
       'likes': 19,
-    },{
-     'username': 'GlobalEdu',
+    }, {
+      'username': 'GlobalEdu',
       'opinion': 'Access to free quality education is a fundamental human right, not a privilege.',
-     'likes': 55,
+      'likes': 55,
     },
 
   ];
