@@ -69,20 +69,23 @@ class _DebateCreationFlowState extends State<DebateCreationFlow> {
       );
     }
     else {
-      // DONE PRESSED — show confirmation
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title: Text("Success ✅"),
-          content: Text("Your debate has been created successfully!"),
+          title:const Text("Success ✅"),
+          content:const Text("Your debate has been created successfully!"),
           actions: [
+            TextButton(onPressed:(){
+            Navigator.pop(context);
+            },
+                child: const Text('Cancel')),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
                 resetForm();
               },
               child: const Text("OK"),
-            )
+            ),
           ],
         ),
       );
