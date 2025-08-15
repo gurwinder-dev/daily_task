@@ -84,7 +84,7 @@ class _SavedDebatesScreenState extends State<SavedDebatesScreen> {
               ),
             ),
             const SizedBox(width: 12),
-            SizedBox(width: 70,
+            SizedBox(width: 80,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: DropdownButton<String>(
