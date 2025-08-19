@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                    Navigator.push(context,
-                   MaterialPageRoute(builder: (context)=>debateScreen()));
+                   MaterialPageRoute(builder: (context)=>DebateScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
