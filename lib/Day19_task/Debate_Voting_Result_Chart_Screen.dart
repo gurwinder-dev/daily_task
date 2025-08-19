@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.blue,
         ),
       body: DebateResultCard(
-        topic: "Should smartphones be allowed in classrooms?",
+        topic: "Should AI replace teachers?",
         agreeVotes: 120,
         disagreeVotes: 80,
       ),
