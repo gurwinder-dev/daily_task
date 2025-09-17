@@ -136,7 +136,7 @@ class _MentionTextFieldState extends State<MentionTextField> {
           focusNode: _focusNode,
           maxLines: null,
           onChanged: _onTextChanged,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Write a comment...',
             border: OutlineInputBorder(),
           ),
